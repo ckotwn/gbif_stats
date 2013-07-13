@@ -1,4 +1,12 @@
-gbif_stats
+GBIF Nodes Statistics
 ==========
 
-A Drupal module experiment showing Nodes information
+A Drupal module experiment shows Nodes information.
+
+This is a home project that tries to digest information from the GBIF Data Portal (2007), the GBIF Registry and the internal IMS which manages information of GBIF Participant Nodes.
+
+This module was produced to serve the need in regional meetings where I was very frequently requested for various information.
+
+This module talks to the SQL DBs and FileMaker at the GBIF Secretariat therefore it won't work outside. The code is made public here, primarily for my personal backup, and secondary for those who might benefit from the concept and the usage of D3 with Drupal to show Nodes information.
+
+All Nodes information will be made available through the newly developed and robust GBIF API.
