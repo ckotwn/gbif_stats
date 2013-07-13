@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * Implementation of hook_requirements().
+ *
+ * Uses the Libraries module to provide a message about
+ * the status of the FileMaker API in status report.
+ */
+function gbif_stats_requirements($phase) {
+  
+  $requirements = array();
+  
+  if ($phase == "runtime") {
+
+    // Try to load the API.
+    gbif_stats_load_api();
+    $requirements['gbif_stats']['title'] = t('GBIF Statisitcs');
+    
+    // Is API available?
+    if (class_exists('FileMaker')) {
+      $requirements['gbif_stats']['value'] = 'FileMaker API is installed correctly';
+      $requirements['gbif_stats']['severity'] = REQUIREMENT_OK;
+    }
+
+    // Required API wasn't found.
+    else {
+      $requirements['gbif_stats']['value'] = t('FileMaker API was not found');
+
+      // Provide instructions on installing the FileMaker API for PHP.
+      $requirements['gbif_stats']['description'] = t('The FileMaker API for PHP is required for this module. The API comes with your copy of FileMaker server and should be placed in sites/all/libraries/filemakerapi.');
+      $requirements['gbif_stats']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_enable()
+ */
+function gbif_stats_enable() {
+  // Create a directory for storing generated data files
+  $uri = 'public://gbif_stats';
+  $dir_exists = file_prepare_directory($uri);
+  if (!$dir_exists) {
+    drupal_mkdir($uri);
+  }
+  
+  $regions = array(
+    'africa' => 'Africa',
+    'asia' => 'Asia',
+    'europe' => 'Europe',
+    'namerica' => 'North America',
+    'lamerica' => 'Latin America',
+    'oceania' => 'Oceania',
+  );
+  
+  variable_set('regions', $regions);
+  
+  $mendeley_tags = array('GBIF_used', 'GBIF_discussed', 'GBIF_mentioned');
+  
+  variable_set('mendeley_tags', $mendeley_tags);
+
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function gbif_stats_uninstall() {
+  // Detele the directory and generated data from this module
+  /*
+  $uri = 'public://gbif_stats';
+  $dir_exists = file_prepare_directory($uri);
+  if ($dir_exists) {
+    $deleted = drupal_rmdir($uri);
+  }}
+  if ($deleted == TRUE) {
+    drupal_set_message('GBIF Statistics file successfully deleted.');
+  }
+  */
+  
+  variable_del('mendeley_tags');
+  variable_del('regions');
+  variable_del('gbif_stats_client_mode');
+  variable_del('gbif_stats_update_interval');
+  variable_del('gbif_stats_last_update');
+  variable_del('ims_connection');
+}

@@ -1,0 +1,6 @@
+name = "GBIF Statistics"
+description = "Internal use only. Provides live updated statistics of GBIF Network."
+version = 0.1
+package = GBIF
+core = 7.x
+configure = admin/config/gbif_stats/settings
