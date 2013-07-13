@@ -1,7 +1,7 @@
 GBIF Nodes Statistics
 ==========
 
-A Drupal module experiment shows Nodes information.
+A Drupal module experiment showing Nodes information.
 
 This is a home project that tries to digest information from the GBIF Data Portal (2007), the GBIF Registry and the internal IMS which manages information of GBIF Participant Nodes.
 
