@@ -1,5 +1,9 @@
-GBIF Nodes Statistics
+GBIF Nodes Statistics (Deprecated)
 ==========
+
+**NOTE**: This repository is **archived and serves only as a proof-of-concept**. For the current implementation please go to [The GBIF Network](https://www.gbif.org/the-gbif-network).
+
+---
 
 A Drupal module experiment showing Nodes information.
 
